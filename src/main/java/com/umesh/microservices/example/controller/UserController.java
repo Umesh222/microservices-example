@@ -35,12 +35,12 @@ public Long saveUser(@RequestBody User user) {
 
 	
 	@GetMapping("/userpage")
-	public Page<User> getUsers(@RequestParam(value ="page")int page,
+	public ResponseEntity<List<User>> getUsers(@RequestParam(value ="page")int page,
 			@RequestParam(value ="limit")int limit){
 		
-		
-		
-		return userService.getUsers(page, limit);
+		Page<User> list=userService.getUsers(page, limit);
+		System.out.println(list.getContent()+">>>>>>>>>>>>?");
+		return new ResponseEntity<List<User>>(list.getContent(),HttpStatus.CREATED);
 	}
 	
 	@PutMapping
