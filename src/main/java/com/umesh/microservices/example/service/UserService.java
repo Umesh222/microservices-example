@@ -16,16 +16,23 @@ public class UserService {
 	@Autowired
 	UserRepository userRepository;
 	
+	
+	
 	public void saveUser(User user) {
-		
-	userRepository.save(user);	
-	}
+	userRepository.save(user);}
 
+	
 	public Page<User> getUsers(int pageNo,int pageSize){
 		Pageable paging = PageRequest.of(pageNo, pageSize);
-		 
-		 return  userRepository.findAll(paging);
-			
+		 return  userRepository.findAll(paging);}
+	
+	
+	public User updateUser(long userid,User user) {
+User user1=userRepository.findById(userid).get();
+user1.setName(user.getName());
+user1.setEmail(user.getEmail());
+
+	return	 userRepository.save(user1);
 	}
 	
 	
