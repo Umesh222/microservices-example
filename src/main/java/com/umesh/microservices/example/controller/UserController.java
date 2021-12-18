@@ -47,10 +47,10 @@ public class UserController {
 		return userService.updateUser(userid,user);
 	}
 
-	@DeleteMapping
-	public String deleteUser() {
-
-		return "tested...";
+	@DeleteMapping("/user/{userid}")
+	public ResponseEntity<User> deleteUser(@PathVariable("userid")long  userid) {
+      userService.deleteUser(userid);
+      return new ResponseEntity<User>(HttpStatus.NO_CONTENT);
 	}
 
 	@GetMapping
